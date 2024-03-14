@@ -63,10 +63,10 @@ export default {
     },
     {
       name: 'projects',
+      title: 'Select projects',
       type: 'array',
-      title: 'Select Projects',
-      description: 'Select projects to feature on the homepage, IT MUST TO BE AN EVEN NUMBER',
-      of: [{ type: 'reference', to: { type: 'projets' } }], // Replace 'project' with the actual name of the document type representing projects.
+      description: 'Select projects to feature on the homepage, IT MUST BE AN EVEN NUMBER',
+      of: [{ type: 'reference', to: { type: 'projects' } }], // Replace 'talents' with the actual name of the document type representing projects.
     },
   ],
   

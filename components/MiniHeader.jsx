@@ -3,7 +3,7 @@ import { useState } from "react"; // Import the useState hook
 import ViewAll from "./gallery/ViewAll";
 import { useRouter } from "next/navigation"; // Step 1: Import useRouter from "next/router"
 import { PortableText } from "@portabletext/react";
-export default function MiniHeader({ projectData }) {
+export default function MiniHeader({ title, authors, infos, pageData }) {
   // Step 1: Add state variable to keep track of visibility
   const [isSlideCountVisible, setIsSlideCountVisible] = useState(false);
 
@@ -40,20 +40,8 @@ export default function MiniHeader({ projectData }) {
         Close
       </a>
       <div className="hidden md:flex items-center gap-3 flex2 md:justify-center">
-        <div className="flex gap-2 justify-center items-center ">
-          {(projectData[0]?.tags?.length || 0) > 0
-            ? projectData[0].tags.map((tag, index) => (
-                <h4 className="menuFooter grey" key={index}>
-                  {tag.title}
-                </h4>
-              ))
-            : projectData[0]?.tagsSUB.map((tagSub, index) => (
-                <h4 className="menuFooter grey" key={index}>
-                  {tagSub.title}
-                </h4>
-              ))}
-        </div>
-        <h3 className="itemFooter grey">{projectData[0].client} </h3>
+        <h4 className="menuFooter grey">{authors}</h4>
+        <h3 className="itemFooter grey">{title}</h3>
       </div>
       <div className="flex gap-3 md:flex-1 md:justify-end md:items-center">
         <div
@@ -83,27 +71,15 @@ export default function MiniHeader({ projectData }) {
         } invisible -z-10 transition-all fixed top-0 left-0 h-screen w-screen almostWhite px-6 flex items-center justify-center`}
       >
         <h3 className="credits-serif text-center">
-          <PortableText value={projectData[0].informationsBlock} />{" "}
+          <PortableText value={infos} />{" "}
         </h3>
         <div className="md:hidden block fixed h-24 bottom-0 w-full text-center">
-          <div className="flex gap-2 justify-center pb-2">
-          {(projectData[0]?.tags?.length || 0) > 0
-            ? projectData[0].tags.map((tag, index) => (
-                <h4 className="menuFooter grey" key={index}>
-                  {tag.title}
-                </h4>
-              ))
-            : projectData[0]?.tagsSUB.map((tagSub, index) => (
-                <h4 className="menuFooter grey" key={index}>
-                  {tagSub.title}
-                </h4>
-              ))}
-          </div>
-          <span className="itemFooter grey">{projectData[0].client}</span>
+          <h4 className="menuFooter grey">{authors}</h4>
+          <h3 className="itemFooter grey">{title}</h3>
         </div>
       </div>
       <ViewAll
-        projectData={projectData}
+        projectData={pageData}
         isVisible={isViewAllVisible}
         setIsVisible={setIsViewAllVisible}
       />

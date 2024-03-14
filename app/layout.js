@@ -23,7 +23,7 @@ export default function RootLayout({ children, params }) {
         <head>
         <Script src="https://cdn.usefathom.com/script.js" data-site="TGPHYDIK" defer />
 
-          <title>Paramour</title>
+          <title>Paramour&Talent</title>
           <meta
             name="description"
             content="Paramour is a paris based production agency dedicated to the fashion and lifestyle industries"

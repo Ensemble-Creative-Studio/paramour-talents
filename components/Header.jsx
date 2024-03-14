@@ -8,7 +8,8 @@ export default function Header({}) {
       <Suspense fallback={false}>
 
         <HeaderLink href="/">HOME</HeaderLink>
-        <HeaderLink href="/works">WORK</HeaderLink>
+        <HeaderLink href="/talents">TALENTS</HeaderLink>
+        <HeaderLink href="https://www.paramour.fr/">PRODUCTION</HeaderLink>
         <HeaderLink href="/infos">INFOS</HeaderLink>
         </Suspense>
       </div>

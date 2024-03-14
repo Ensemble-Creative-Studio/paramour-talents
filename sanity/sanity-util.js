@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 
 export async function getHero() {
   return client.fetch(groq`
-    *[_type == 'homePage']{
+    *[_type == 'homePage' && imageOrUrl != null]{
       _type,
 
   imageOrUrl,
@@ -13,7 +13,7 @@ export async function getHero() {
     ...,
 slug,
     client,
-    tags[]->,
+    author[]->,
    
     "firstImage": imagesGallery[0].asset->{
         url,
@@ -26,7 +26,6 @@ slug,
     }
   `);
 }
-
 export async function getInfos() {
   return client.fetch(groq`*[_type == 'infos']`);
 }
@@ -36,12 +35,13 @@ export async function getFooter() {
 export async function getPageLegal() {
   return client.fetch(groq`*[_type == 'pageFooter']`);
 }
-export async function getClient() {
+export async function getFeaturedTalents() {
   const data = await client.fetch(groq`
-    *[_type == 'featuredClients']{
-      "clients": clients[]->{
+    *[_type == 'featuredTalents']{
+      "talents": talents[]->{
         slug,
-        client,
+        talent,
+        name,
         tags[]->,
         "firstImage": imagesGallery[0].asset->{
           url,
@@ -51,8 +51,8 @@ export async function getClient() {
   `);
 
   // Sort the 'clients' array of each featuredClients document
-  data.forEach(featuredClients => {
-    featuredClients.clients.sort((a, b) => a.client.localeCompare(b.client));
+  data.forEach(featuredTalents => {
+    featuredTalents.talents.sort((a, b) => a.name.localeCompare(b.name));
   });
 
   return data;
@@ -60,11 +60,12 @@ export async function getClient() {
 export async function getTag() {
   return client.fetch(groq`*[_type == 'tag']|order(orderRank)`);
 }
-export async function getProjects() {
+export async function getTalents() {
   return client.fetch(
-    groq`*[_type == 'projets']{..., tags[]->,
-     tagsSUB[]->,
-     "firstImage": imagesGallery[0].asset->{
+    groq`*[_type == 'talents']{
+      ..., 
+      tags[]->,
+      "firstImage": imagesGallery[0].asset->{
         url,
       
         metadata
@@ -82,18 +83,29 @@ export async function getProjects() {
     }|order(orderRank)`
   );
 }
-export async function getProjectBySlug(slug) {
+export async function getTalentBySlug(slug) {
 
   return client.fetch(groq`
-    *[_type == 'projets' && slug.current == $slug]{
+    *[_type == 'talents' && slug.current == $slug]{
       ...,
-      "tags": tags[]->,
-      "tagsSUB": tagsSUB[]->,
+      tags[]->,
     
     }`, 
     { slug }  // Passing the slug as a parameter to the query
   );
 }
+export async function getProjectBySlug(slug) {
+
+  return client.fetch(groq`
+    *[_type == 'projects' && slug.current == $slug]{
+      ...,
+      "author": author[]->,
+    
+    }`, 
+    { slug }  // Passing the slug as a parameter to the query
+  );
+}
+
 
 // export async function getPresentation(lang) {
 //   return client.fetch(groq`*[_type == 'presentation']`);

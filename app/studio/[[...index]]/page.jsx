@@ -18,9 +18,9 @@ export default function StudioPage() {
 
   return (
     <div>
-      <div className='py-4' href="/">
+      {/* <div className='py-4' href="/">
         <a  href='/'className="p-2 ml-2 border  my-4 mix-blend-difference text-white">Go to website</a>
-      </div>
+      </div> */}
       <NextStudio config={config} />
     </div>
   );}

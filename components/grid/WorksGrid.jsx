@@ -36,7 +36,7 @@ export default function WorksGrid({ filteredProject }) {
           <div className="pt-12 px-6" key={index}>
             <StickyMiddleComponent client={project.client} tags={tags} />
             {isWide ? (
-              <DelayLink href={`/works/${project.slug.current}`}>
+              <DelayLink href={`/talents/${project.slug.current}`}>
                 <div className="relative  w-full h-auto pt-16 pb-48">
                   <FadingImage
                     src={project.firstImage.url}
@@ -47,7 +47,7 @@ export default function WorksGrid({ filteredProject }) {
                 </div>
               </DelayLink>
             ) : (
-              <DelayLink  href={`/works/${project.slug.current}`}>
+              <DelayLink  href={`/talents/${project.slug.current}`}>
                 <RandomJustifyImagePair
                 showOnlyFirstImage={project.showOnlyFirstImage}
                   firstImage={project.firstImage?.url}

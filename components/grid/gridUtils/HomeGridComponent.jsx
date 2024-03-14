@@ -1,10 +1,10 @@
 'use client'
 import React, { useState, useEffect } from "react";
-import FeaturedGridHome from "../FeaturedClientHome";
+import FeaturedGridHome from "../FeaturedProjectsHome";
 import FeaturedGridHomeDesktop from "../FeaturedClientHomeDesktop";
+
 function HomeGridComponent({ heroData }) {
     const [screenWidth, setScreenWidth] = useState(null); // Initialize with null
-  
     useEffect(() => {
       // Set the initial width when the component mounts
       setScreenWidth(window.innerWidth);

@@ -3,19 +3,19 @@ import Hero from "@/components/Hero";
 import MedieumSentence from "@/components/MediumSentence";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ClientList from "@/components/ClientList";
+import TalentList from "@/components/TalentList";
 import Layout from "@/components/transition/PageTransition";
 import {
   getInfos,
   getFooter,
   getPageLegal,
-  getClient,
+  getFeaturedTalents,
 } from "../../sanity/sanity-util";
 export default async function Infos() {
   const heroData = await getInfos();
   ``;
   const footerData = await getFooter();
-  const clientData = await getClient();
+  const talentData = await getFeaturedTalents();
 
   const pageLegalData = await getPageLegal();
   return (
@@ -34,9 +34,9 @@ export default async function Infos() {
               <MedieumSentence heroData={heroData[0].serviceText} />
             </div>
             <div className="romie font-light uppercase text-center text-h1-mobile  credits-serif pt-48 md:pt-56 pb-1 ">
-              Our Clients
+              Our talents
             </div>
-            <ClientList clientData={clientData} fontSize='credits-sans' />
+            <TalentList talentData={talentData} fontSize='credits-sans' />
 
             <Footer footerData={footerData} pageLegalData={pageLegalData} />
           </div>

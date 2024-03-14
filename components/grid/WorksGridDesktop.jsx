@@ -139,7 +139,7 @@ const Project = ({ project, index, tags, startColumn, span, position }) => {
     <div className="flex" style={style}>
       <DelayLink
         className="flex projectHover"
-        href={`/works/${project.slug.current}`}
+        href={`/talents/${project.slug.current}`}
       >
         <ProjectMedia project={project} index={index} /> 
         {/* Notice the index prop here */}

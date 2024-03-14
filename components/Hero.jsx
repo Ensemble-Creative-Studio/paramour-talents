@@ -8,7 +8,7 @@ export default function Hero({ heroData }) {
       <div className="flex justify-center items-center absolute left-0 top-0 h-screen w-screen">
         <div className="w-full h-auto flex justify-center items-center md:h-3/5">
           <Image
-            className=" object-contain h-full md:w-full  mix-blend-difference  "
+            className=" object-contain h-full md:w-full"
             priority
             src={logo}
             width={210}

@@ -88,7 +88,7 @@ h4 {
   line-height: 89%; /* 34.71px */
 }
 .bigName{
-  color: var(--text-grey, #474747);
+  /* color: var(--text-grey, #474747); */
 text-align: center;
 /* D/H1/Sans */
 font-family: "TWKEverett-Medium";
@@ -336,7 +336,6 @@ max-width: 120ch;
 min-height: 900px;
 }
 .bigName{
-  color: var(--text-grey, #474747);
 text-align: center;
 /* D/H1/Sans */
 font-family: "TWKEverett-Medium";
@@ -409,7 +408,7 @@ margin-left: 1.5rem;
 .scaling{
   transform: scale(3);
 }
-.works img, .works video,.home img, .home video{
+.works img, .works video, .home video{
   max-height: 700px;
   object-fit: contain;
 }

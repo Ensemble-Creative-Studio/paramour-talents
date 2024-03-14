@@ -11,19 +11,12 @@ export default function FeaturedGridHomeDesktop({ heroData }) {
 
   return (
     <div>
-      <Header />
       {chunkedProjects.map((projectChunk, index) => (
         <ProjectRow key={index} projects={projectChunk} />
       ))}
     </div>
   );
 }
-
-const Header = () => (
-  <div className="romie font-light uppercase text-center text-h1-mobile py-28 md:py-32">
-    Featured <br /> Projects
-  </div>
-);
 
 const ProjectRow = ({ projects }) => {
   const [firstStart, setFirstStart] = useState(() => randomStartColumn(0));
@@ -36,7 +29,7 @@ const ProjectRow = ({ projects }) => {
   return (
     <div className="gridProjects justify-between h-screen">
       {projects.map((project, projectIndex) => {
-        const tags = project.tags.map((tag) => tag.title).join(", ");
+        const authors = project.author.map((author) => author.name).join(", ");
 
         return (
           <Project 
@@ -46,7 +39,7 @@ const ProjectRow = ({ projects }) => {
             startColumn={projectIndex === 0 ? firstStart : secondStart}
             span={projectIndex === 0 ? firstSpan : secondSpan}
             position={projectIndex === 0 ? firstPosition : secondPosition}
-            tags={tags}
+            authors={authors}
           />
         )
       })}
@@ -83,7 +76,7 @@ function decidePadding(index, position) {
 }
 
 
-const Project = ({ project, index, tags, startColumn, span, position }) => {
+const Project = ({ project, index, authors, startColumn, span, position }) => {
   // Removed this line: const position = decideItemPosition(index);
   const paddingStyle = decidePadding(index, position);
 
@@ -99,15 +92,15 @@ const Project = ({ project, index, tags, startColumn, span, position }) => {
     alignItems: alignItems,  // Here's the change
     ...paddingStyle
   };
-console.log(tags)
+  
   return (
     <div className="flex" style={style}>
       <DelayLink
         className="flex projectHover"
-        href={`/works/${project.slug.current}`}
+        href={`/projects/${project.slug.current}`}
       >
         <ProjectMedia project={project} />
-        <FixedMiddleComponent client={project.client} tags={tags} />
+        <FixedMiddleComponent project={project.title} authors={authors} />
       </DelayLink>
     </div>
   );

@@ -14,16 +14,13 @@ const FadingImage = ({ src, alt, width, height, style, className }) => {
 
     return (
         <motion.div
-        className={className}
+            className={className}
             initial='hidden'
             whileInView='visible'
             variants={fadeIn}
-            viewport={{
-                once: true,
-               
-            }}
+            viewport={{ once: true, }}
         >
-            <Image src={src} quality={65} style={style} alt={alt} width={width} height={width} />
+            <Image src={src} quality={65} style={style} alt={alt} width={width} height={height} />
         </motion.div>
     );
 };

@@ -7,7 +7,7 @@ export const useStickyMiddle = () => {
   useEffect(() => {
     if (ref.current) {
       const height = ref.current.offsetHeight;
-      setStyle({ position: 'sticky', top: `calc(50vh - ${height/2 }px)` });
+      setStyle({ position: 'sticky', top: `calc(50vh - ${height/2 }px)`, 'margin-top': `-${height}px` });
     }
   }, [ref]);
 

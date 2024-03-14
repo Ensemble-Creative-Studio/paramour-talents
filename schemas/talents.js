@@ -5,21 +5,20 @@ import {
 
 export default {
   type: "document",
-  name: "projets",
-  title: "Projets",
+  name: "talents",
+  title: "Talents",
   orderings: [orderRankOrdering],
   fields: [
-    {
-      name: "client",
+    { name: "name",
+      title: "Name",
       type: "string",
-      title: "Client",
+      description: "Enter the name of the talent",
       required: true,
     },
-    {
-      name: "tags",
+    { name: "tags",
       type: "array",
-      title: "Categories",
-      description:'Select a category ONLY if it is a "all" project',
+      title: "Expertises",
+      description:'Select an expertise for the talent',
       of: [
         {
           type: "reference",
@@ -28,35 +27,32 @@ export default {
       ],
       // validation: (Rule) => Rule.required(),
     },
-    {
-      name: "tagsSUB",
-      type: "array",
-      title: "Sub categories",
-      description: "Select ONLY one sub category if it is a child project",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "tag" }],
-        },
-      ],
-      validation: (Rule) => Rule.max(1).error('You can only select one tag.'),
-    },
-    {
+    // { name: "tagsSUB",
+    //   type: "array",
+    //   title: "Sub categories",
+    //   description: "Select ONLY one sub category if it is a child project",
+    //   of: [
+    //     {
+    //       type: "reference",
+    //       to: [{ type: "tag" }],
+    //     },
+    //   ],
+    //   validation: (Rule) => Rule.max(1).error('You can only select one tag.'),
+    // },
+    { name: "slug",
       title: "Slug",
-      name: "slug",
       type: "slug",
-      description: "click on generate to auto-fill, if this is a sub category add something after client name like '-photo'",
+      description: "Click on generate to auto-fill",
       options: {
-        source: "client",
+        source: "name",
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
     },
-    orderRankField({ type: "projets", name: "name" }),
-    {
-      name: "informationsBlock",
+    { name: "informationsBlock",
+      title: "Description",
       type: "blockContent",
-      title: "Infos",
+      description: "Enter a text about the talent",
     },
     {
       name: "imagesGallery",
@@ -112,26 +108,26 @@ export default {
         },
       ],
     },
-    
+    orderRankField({ type: "talents", name: "name" }),
   ],
-  preview: {
-    select: {
-      client: "client",
-      tagsSUB: "tagsSUB.0.title", // Get the first item from the array of references
-    },
-    prepare: ({ client, tagsSUB }) => {
-      console.log("Client:", client);
-      console.log("TagsSUB:", tagsSUB);
+  // preview: {
+  //   select: {
+  //     talent: "talent",
+  //     tagsSUB: "tagsSUB.0.title", // Get the first item from the array of references
+  //   },
+  //   prepare: ({ talent, tagsSUB }) => {
+  //     console.log("Talent:", talent);
+  //     console.log("TagsSUB:", tagsSUB);
       
-      const subCategory = tagsSUB; // Since tagsSUB now directly holds the title
-      console.log("SubCategory:", subCategory);
+  //     const subCategory = tagsSUB; // Since tagsSUB now directly holds the title
+  //     console.log("SubCategory:", subCategory);
       
-      const displayName = subCategory ? `${client} - ${subCategory}` : client;
-      console.log("DisplayName:", displayName);
+  //     const displayName = subCategory ? `${talent} - ${subCategory}` : talent;
+  //     console.log("DisplayName:", displayName);
       
-      return {
-        title: displayName,
-      };
-    },
-  },
+  //     return {
+  //       title: displayName,
+  //     };
+  //   },
+  // },
 };

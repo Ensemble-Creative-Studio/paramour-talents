@@ -6,9 +6,9 @@ import { dashboardTool } from "@sanity/dashboard";
 import { vercelDeployTool } from 'sanity-plugin-vercel-deploy'
 
 import { schemaTypes } from "./schemas"
-import {apiVersion, dataset, projectId} from './sanity/env'
-import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
-import {schema} from './sanity/schema'
+import { apiVersion, dataset, projectId } from './sanity/env'
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
+import { schema } from './sanity/schema'
 import { netlifyWidget } from "sanity-plugin-dashboard-widget-netlify";
 
 // Define the actions that should be available for singleton documents
@@ -21,6 +21,7 @@ export default defineConfig({
   basePath: '/studio',
   projectId,
   dataset,
+  apiVersion,
 
   plugins: [
     deskTool({
@@ -41,8 +42,6 @@ export default defineConfig({
                   .documentId("homePage")
               ),
              
-              orderableDocumentListDeskItem({type: 'projets',  title: 'Projects', S, context}),
-              // S.documentTypeListItem("projets").title("Projets"),
               S.listItem()
               .title("Infos")
               .id("infos")
@@ -55,20 +54,22 @@ export default defineConfig({
                   .documentId("infos")
               ),
              
-             
-             
               S.divider(),
-              orderableDocumentListDeskItem({type: 'tag',  title: 'Categories', S, context}),
+              orderableDocumentListDeskItem({type: 'projects',  title: 'Projects', S, context}),
+              orderableDocumentListDeskItem({type: 'talents',  title: 'Talents', S, context}),
+             
+              // S.divider(),
+              // orderableDocumentListDeskItem({type: 'tag',  title: 'Categories', S, context}),
               S.listItem()
-              .title("Featured Clients")
-              .id("featuredClients")
+              .title("Featured Talents")
+              .id("featuredTalents")
               .child(
                 // Instead of rendering a list of documents, we render a single
                 // document, specifying the `documentId` manually to ensure
                 // that we're editing the single instance of the document
                 S.document()
-                  .schemaType("featuredClients")
-                  .documentId("featuredClients")
+                  .schemaType("featuredTalents")
+                  .documentId("featuredTalents")
               ),
               S.divider(),
             // Regular document types
