@@ -2,6 +2,7 @@
 // import { useStickyMiddle } from './gridUtils/sticky';
 
 const FixedMiddleComponent = ({ project, authors }) => {
+  
   return (
     <div className="projectTitleHover z-40 left-0 top-0 opacity-0 fixed h-screen w-screen flex justify-center items-center pointer-events-none mix-blend-difference" >
       <div>
