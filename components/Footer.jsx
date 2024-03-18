@@ -7,7 +7,7 @@ import { getCurrentYear } from "./utils/getYear";
 export default function Footer({ footerData, pageLegalData }) {
   const currentYear = getCurrentYear();
   return (
-    <footer className="z-10 pt-24 pb-10 md:h-screen md:flex md:flex-col md:justify-between">
+    <footer className="z-10 pt-24 pb-10 md:h-screen md:flex md:flex-col md:justify-between md:px-10">
       <div className=" flex justify-center pb-20 md:h-full md:pb-0 md:items-center md:w-full">
         <Image
           className=" object-contain  mix-blend-difference contrast-50 md:h-full md:w-3/12	 "

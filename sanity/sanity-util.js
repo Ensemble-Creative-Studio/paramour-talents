@@ -58,7 +58,11 @@ export async function getFeaturedTalents() {
   return data;
 }
 export async function getTag() {
-  return client.fetch(groq`*[_type == 'tag']|order(orderRank)`);
+  return client.fetch(groq`*[_type == 'tag']|order(orderRank){
+    ...,
+    _id,
+    "count": count(*[_type == "talents" && references(^._id)])
+  }`);
 }
 export async function getTalents() {
   return client.fetch(

@@ -45,6 +45,7 @@ export default function TagList() {
     }
     return wrappedElements;
   };
+  const filteredTagData = tagData.filter(tag => tag.count > 0);
 
   const tagElements = [
     <span
@@ -58,7 +59,7 @@ export default function TagList() {
       {" "}
       ALL,
     </span>,
-    ...tagData.map((tag, index) => (
+    ...filteredTagData.map((tag, index) => (
       <span
         className={`cursor-pointer uppercase ${tag === currentTag ? "selected" : "notselected"}`}
         key={tag._id}
@@ -68,7 +69,7 @@ export default function TagList() {
         }}
       >
         {tag.title}
-        {index === tagData.length - 1 ? "." : ","}
+        {index === filteredTagData.length - 1 ? "." : ","}
       </span>
     )),
   ];

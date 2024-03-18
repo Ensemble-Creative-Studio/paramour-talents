@@ -15,7 +15,7 @@ console.log(projectsData[0].tagsSUB)
         
         projectsData.filter((project) =>
        
-          project.tagsSUB?.some((tag) => tag._id === currentTag._id)
+          project.tags?.some((tag) => tag._id === currentTag._id)
         )
       );
     } else {

@@ -31,10 +31,9 @@ export default async function Work() {
               <main className="almostWhite  works">
                 <TagList />
                 <div className="md:px-10">
-                <ProjectList />
-                <Footer footerData={footerData} pageLegalData={pageLegalData} />
+                  <ProjectList />
+                  <Footer footerData={footerData} pageLegalData={pageLegalData} />
                 </div>
-                
               </main>
             </div>
           </TagProvider>

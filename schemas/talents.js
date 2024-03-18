@@ -27,18 +27,6 @@ export default {
       ],
       // validation: (Rule) => Rule.required(),
     },
-    // { name: "tagsSUB",
-    //   type: "array",
-    //   title: "Sub categories",
-    //   description: "Select ONLY one sub category if it is a child project",
-    //   of: [
-    //     {
-    //       type: "reference",
-    //       to: [{ type: "tag" }],
-    //     },
-    //   ],
-    //   validation: (Rule) => Rule.max(1).error('You can only select one tag.'),
-    // },
     { name: "slug",
       title: "Slug",
       type: "slug",
@@ -49,6 +37,18 @@ export default {
       },
       validation: (Rule) => Rule.required(),
     },
+    { name: 'instagram',
+    title: 'Instagram',
+    type: 'url',
+    description: 'Enter the talent\'s instagram page url',
+    validation: Rule => Rule
+        .uri({
+            scheme: ['https'],
+            allowRelative: false
+        })
+        .regex(/^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_.]+\/?$/)
+        .error('Please enter a valid Instagram URL')
+},
     { name: "informationsBlock",
       title: "Description",
       type: "blockContent",

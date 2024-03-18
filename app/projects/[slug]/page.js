@@ -1,6 +1,6 @@
 import "../../globals.css";
 
-import MiniHeader from "@/components/MiniHeader";
+import MiniHeader from "@/components/ProjectHeader";
 import GalleryComponent from "@/components/gallery/GalleryComponent";
 import ProjectInfoOverlay from "@/components/gallery/ProjectInfoOverlay";
 import { getProjectBySlug } from "../../../sanity/sanity-util";
