@@ -7,29 +7,24 @@ import HeaderLink from "./utils/HeaderLink.js";
 import TalentGallery from "./gallery/TalentGallery.jsx";
 export default function TalentHeader({ talentName, tags, infos, pageData }) {
   // Step 1: Add state variable to keep track of visibility
-  const [isSlideCountVisible, setIsSlideCountVisible] = useState(false);
-
+  const [isViewAllVisible, setIsViewAllVisible] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const router = useRouter(); // Step 2: Access the router object from useRouter()
 
   // Step 2: Event handler to toggle visibility
   const handleInfosClick = () => {
     setIsVisible(!isVisible);
+    setIsViewAllVisible(false);
   };
 
   // Step 3: Event handler for "Close" link to go back in history
   const handleCloseClick = () => {
     router.back(); // Use router.back() to go back in history
   };
-  const [isViewAllVisible, setIsViewAllVisible] = useState(true);
 
   // Event handler to toggle "View All" component's visibility
   const handleViewAllClick = () => {
     setIsViewAllVisible((prevState) => !prevState);
-
-    // If "View All" is going to be visible, hide the slide count.
-    // Otherwise, show the slide count.
-    setIsSlideCountVisible((prevState) => !prevState);
   };
 
   const instagram = pageData[0].instagram;
@@ -49,7 +44,7 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
           >
             Back
           </a>
-          <div className="hidden md:flex items-center gap-8 md:justify-center">
+          <div className="hidden md:flex items-center gap-8 everest md:justify-center">
             <HeaderLink href="#portfolio">PORTFOLIO</HeaderLink>
             <HeaderLink href="#videos">VIDEOS</HeaderLink>
             <HeaderLink href="#bio">BIO</HeaderLink>
@@ -57,7 +52,7 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
           </div>
           <div className="flex gap-3 md:flex-1 md:justify-end md:items-center">
             <div
-              className="slideCount -z-20 relative menuFooter hidden md:block"
+              className={`slideCount -z-20 relative menuFooter ${!isViewAllVisible ? 'block' : 'hidden'}`}
               id="slideCountDiv"
             >
               1/12
@@ -72,7 +67,7 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
               className="uppercase menuFooter grey leading-none cursor-pointer "
               onClick={handleInfosClick} // Step 2: Attach the event handler to the "Infos" element
             >
-              Infos
+              {`Infos`}
             </span>
           </div>
         </div>
