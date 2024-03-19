@@ -52,7 +52,7 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
           </div>
           <div className="flex gap-3 md:flex-1 md:justify-end md:items-center">
             <div
-              className={`slideCount -z-20 relative menuFooter ${!isViewAllVisible ? 'block' : 'hidden'}`}
+              className={`slideCount -z-20 relative menuFooter hidden md:${!isViewAllVisible ? 'block' : 'hidden'}`}
               id="slideCountDiv"
             >
               1/12
@@ -61,13 +61,13 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
               className="itemFooter grey cursor-pointer hidden md:block"
               onClick={handleViewAllClick}
             >
-              VIEW ALL
+              {`${!isVisible ? "VIEW ALL" : ""}`}
             </div>
             <span
               className="uppercase menuFooter grey leading-none cursor-pointer "
               onClick={handleInfosClick} // Step 2: Attach the event handler to the "Infos" element
             >
-              {`Infos`}
+              {`${!isVisible ? "Infos" : "Close"}`}
             </span>
           </div>
         </div>
@@ -83,11 +83,16 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
             <PortableText value={infos} />{" "}
           </h3>
           <div className="md:hidden block fixed h-24 bottom-0 w-full text-center">
-            <h4 className="menuFooter grey">{tags}</h4>
-            <h3 className="itemFooter grey">{talentName}</h3>
+            <h4 className="menuFooter grey">{talentName}</h4>
+            <div className="flex items-center gap-8 everest justify-center">
+              <HeaderLink href="#portfolio">PORTFOLIO</HeaderLink>
+              <HeaderLink href="#videos">VIDEOS</HeaderLink>
+              <HeaderLink href="#bio">BIO</HeaderLink>
+              <InstagramLink></InstagramLink>
+            </div>
           </div>
         </div>
-        <h2 className="romie text-7xl uppercase -m-8 text-center">{talentName}</h2>
+        <h2 className="hidden md:block romie text-7xl uppercase -m-8 text-center">{talentName}</h2>
       </header>
       <TalentGallery
         talentData={pageData}
