@@ -5,7 +5,7 @@ import CustomVideoPlayer from "../utils/CustomVideoPlayer";
 export default function GalleryMobile({ projectData }) {
   console.log(projectData[0].videosGallery)
     return (
-        <div className="flex -z-10 gap-40 flex-col pt-56">
+        <div className="flex -z-10 gap-40 flex-col pt-32">
            {projectData[0].videosGallery?.map((video, index) => (
         <div
           key={video._key}

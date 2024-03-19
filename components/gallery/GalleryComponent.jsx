@@ -25,11 +25,13 @@ function GalleryComponent({ projectData }) {
     // This ensures we skip rendering until we have a valid screen width
     if (screenWidth === null) return null;
   
-    if (screenWidth < 768) {
-      return <GalleryMobile projectData={projectData} />;
-    } else {
-      return <KeenSlider projectData={projectData} />;
-    }
+    return <KeenSlider projectData={projectData} />;
+
+    // if (screenWidth < 768) {
+    //   return <GalleryMobile projectData={projectData} />;
+    // } else {
+    //   return <KeenSlider projectData={projectData} />;
+    // }
   }
   
   export default GalleryComponent;

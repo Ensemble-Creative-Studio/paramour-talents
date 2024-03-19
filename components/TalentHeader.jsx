@@ -35,7 +35,7 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
   }
   return (
     <div className="relative">
-      <header className={`fixed px-12 md:px-10 left-0 flex flex-col w-full top-10 md:top-0 z-20 items-center ${isViewAllVisible ? "h-screen almostWhite" : ""}`}>
+      <header className={`fixed px-12 md:px-10 left-0 flex flex-col w-full top-0 z-20 items-center ${isViewAllVisible ? "h-screen almostWhite" : ""}`}>
         {/* Step 4: Use anchor tag and attach the handleCloseClick event handler */}
         <div className="flex flex-row w-full h-28 justify-between items-center">
           <a
@@ -50,7 +50,7 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
             <HeaderLink href="#bio">BIO</HeaderLink>
             <InstagramLink></InstagramLink>
           </div>
-          <div className="flex gap-3 md:flex-1 md:justify-end md:items-center">
+          <div className="flex gap-3 flex-1 justify-end items-center">
             <div
               className={`slideCount -z-20 relative menuFooter hidden md:${!isViewAllVisible ? 'block' : 'hidden'}`}
               id="slideCountDiv"
@@ -58,10 +58,10 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
               1/12
             </div>
             <div
-              className="itemFooter grey cursor-pointer hidden md:block"
+              className="itemFooter grey cursor-pointer"
               onClick={handleViewAllClick}
             >
-              {`${!isVisible ? "VIEW ALL" : ""}`}
+              {`${!isVisible ? isViewAllVisible ? "VIEW ONE" : "VIEW ALL" : ""}`}
             </div>
             <span
               className="uppercase menuFooter grey leading-none cursor-pointer "

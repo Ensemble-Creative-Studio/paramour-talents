@@ -73,7 +73,7 @@ talentData[0].videosGallery?.forEach(video => {
 
 
 return (
-  <div className={`absolute ${isVisible ? "transition-opacity-active" : "transition-opacity hidden"} top-80 left-0 items-end justify-end pb-6 almostWhite flex z-20 overflow-hidden`}>
+  <div className={`absolute ${isVisible ? "transition-opacity-active" : "transition-opacity hidden"} top-32 md:top-80 left-0 items-end justify-end pb-6 almostWhite flex z-20 overflow-hidden`}>
     <div
       className="gap-6 flex z-40 overflow-y-auto"
       style={{ display: "grid", gridTemplateColumns }}
