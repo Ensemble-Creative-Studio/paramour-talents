@@ -36,7 +36,7 @@ export default async function Home() {
             <div className="romie font-light uppercase text-center text-h1-mobile credits-serif pt-48 md:pt-56 pb-1 ">
               Our talents
             </div>
-            <TalentList talentData={talentData} fontSize='credits-sans' />
+            <TalentList talentData={talentData[0].talents} fontSize='credits-sans' />
 
             <Footer footerData={footerData} pageLegalData={pageLegalData} />
           </div>

@@ -52,7 +52,7 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
           </div>
           <div className="flex gap-3 flex-1 justify-end items-center">
             <div
-              className={`slideCount -z-20 relative menuFooter hidden md:${!isViewAllVisible ? 'block' : 'hidden'}`}
+              className={`slideCount -z-20 relative menuFooter ${!isViewAllVisible ? 'block' : 'hidden'}`}
               id="slideCountDiv"
             >
               1/12

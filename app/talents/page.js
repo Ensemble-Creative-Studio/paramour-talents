@@ -14,9 +14,10 @@ import {
 } from "../../sanity/sanity-util";
 import Footer from "@/components/Footer";
 import Layout from "@/components/transition/PageTransition";
+import TalentList from "@/components/TalentList.jsx";
 export default async function Work() {
   const tagData = await getTag();
-  const projectsData = await getTalents();
+  const talentData = await getTalents();
   const footerData = await getFooter();
 
   const pageLegalData = await getPageLegal();
@@ -24,14 +25,18 @@ export default async function Work() {
   return (
     <Layout>
       <CurrentTagProvider>
-        <ProjectProvider initialData={projectsData}>
+        <ProjectProvider initialData={talentData}>
           <TagProvider initialData={tagData}>
             <div>
               <Header />
               <main className="almostWhite  works">
-                <TagList />
+                {/* <TagList /> */}
                 <div className="md:px-10">
-                  <ProjectList />
+                  {/* <ProjectList /> */}
+                  <div className="romie font-light uppercase text-center text-h1-mobile credits-serif pt-48 md:pt-56 pb-1 ">
+                    Our talents
+                  </div>
+                  <TalentList talentData={talentData} fontSize='credits-sans' />
                   <Footer footerData={footerData} pageLegalData={pageLegalData} />
                 </div>
               </main>
