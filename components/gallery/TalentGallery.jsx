@@ -32,7 +32,7 @@ export default function TalentGallery({ talentData, isVisible, setIsVisible }) {
   };
   const handleItemClick = (index, type) => {
     console.log(index);
-    const videoCountBeforeThisItem = mergedItems.slice(0, index).filter(item => item.type === 'video').length;
+    const videoCountBeforeThisItem = mediasList.slice(0, index).filter(item => item.type === 'video').length;
     
     if (type === 'video') {
       setCurrentSlide(index - videoCountBeforeThisItem);
@@ -43,32 +43,17 @@ export default function TalentGallery({ talentData, isVisible, setIsVisible }) {
     setIsVisible(false);
 };
 
-  const getTotalElements = () => {
-    const videosLength = talentData[0].videosGallery?.length || 0;
-    const imagesLength = talentData[0].imagesGallery?.length || 0;
-    return videosLength + imagesLength;
-  };
-  
-  const elementsPerLine = getTotalElements() > 8 ? 6 : 4;
+const mediasList = [];
 
-  const gridTemplateColumns = `repeat(${elementsPerLine}, 1fr)`;
-// Initialize with images
-// Initialize an empty array
-const mergedItems = [];
-
-// Add all images first
-talentData[0].imagesGallery?.forEach(image => {
-  mergedItems.push({ type: 'image', data: image });
+talentData[0].galleries.forEach(gallery => {
+  gallery.medias.forEach(media => {
+    const mediaType = media._type;
+    mediasList.push({ type: mediaType, data: media });
+  })
 });
 
-// Add videos based on their position
-talentData[0].videosGallery?.forEach(video => {
-  if (video.videoShowPosition && video.videoShowPosition - 1 < mergedItems.length) {
-    mergedItems.splice(video.videoShowPosition - 1, 0, { type: 'video', data: video });
-  } else {
-    mergedItems.push({ type: 'video', data: video });
-  }
-});
+const elementsPerLine = mediasList.length > 8 ? 6 : 4;
+const gridTemplateColumns = `repeat(${elementsPerLine}, 1fr)`;
 
 
 
@@ -78,10 +63,10 @@ return (
       className="gap-6 flex z-40 overflow-y-auto"
       style={{ display: "grid", gridTemplateColumns }}
     >
-      {mergedItems.map((item, index) => {
+      {mediasList.map((item, index) => {
         if (item.type === 'video') {
           return (
-            <div key={item.data._key} className={`cursor-pointer flex items-end number-slide${index}`} onClick={() => handleItemClick(index, 'video')}>
+            <div key={item.data._key} className={`cursor-pointer flex items-end number-slide-${index}`} onClick={() => handleItemClick(index, 'video')}>
               <video playsInline loop autoPlay muted src={item.data.urlLoop} />
             </div>
           );

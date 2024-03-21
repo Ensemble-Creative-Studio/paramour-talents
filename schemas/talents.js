@@ -54,14 +54,72 @@ export default {
       type: "blockContent",
       description: "Enter a text about the talent",
     },
-    {
-      name: "imagesGallery",
-      title: "Images gallery",
+    { name: "galleries",
+      title: "Galleries",
+      description: "Create multiple galleries",
       type: "array",
-      description:
-        "Image size should be < 5Mo, the first or the 2 first image will be used as the project thumbnail",
-      of: [{ type: "image" }],
-      // validation: (Rule) => Rule.required(),
+      of: [
+          { name: 'gallery',
+            title: 'Gallery',
+            type: 'object',
+            fields: [
+              {
+                name: 'title',
+                title: 'Gallery title',
+                type: 'string',
+              },
+              {
+                name: 'medias',
+                title: 'Medias',
+                description: 'Drag and drop directly in this field to import multiple images. Image size should be < 5Mo.',
+                type: 'array',
+                of: [
+                  {
+                    name: 'image',
+                    title: 'Image',
+                    type: 'image',
+                  },
+                  {
+                    name: 'video',
+                    title: 'Video',
+                    type: 'object',
+                    fields: [
+                      {
+                        name: 'title',
+                        title: 'Title',
+                        type: 'string',
+                      },
+                      {
+                        name: 'urlLoop',
+                        title: 'URL for looping video',
+                        type: 'url',
+                      },
+                      {
+                        name: 'urlVideo',
+                        title: 'URL for full video',
+                        type: 'url',
+                      },
+                    ],
+                  }
+                ],
+              },
+            ],
+            preview: {
+              select: {
+                medias: 'medias',
+                title: 'title',
+              },
+              prepare(selection) {
+                const { medias, title } = selection;
+                const itemCount = medias?.length || 0;
+                return {
+                  title: title,
+                  subtitle: `${itemCount} items`,
+                };
+              },
+            },                    
+          },
+        ],
     },
     {
       name: "showOnlyFirstImage",
@@ -70,64 +128,53 @@ export default {
       description:
         "Check this box to display only the first image in a bigger format on the work page.",
     },
-    {
-      name: "videosGallery",
-      title: "Videos gallery",
-      type: "array",
-      description: "Video links for looping and full videos.",
-      of: [
-        {
-          type: "object",
-          title: "VideoItem",
-          fields: [
-            {
-              name: "urlLoop",
-              type: "url",
-              title: "URL for Looping Video",
-            },
-            {
-              name: "urlVideo",
-              type: "url",
-              title: "URL for Full Video",
-            },
-            {
-              name: "videoShowPosition",
-              type: "number",
-              title: "Show Video After Image Number",
-              description:
-                "Select after which image the video should be shown. Ensure it's less than or equal to the total number of images in the gallery.",
-              validation: (Rule) =>
-                Rule.required()
-                  .integer()
-                  .positive()
-                  .warning(
-                    "Ensure this is less than or equal to the total number of images in the gallery."
-                  ),
-            },
-          ],
-        },
-      ],
-    },
     orderRankField({ type: "talents", name: "name" }),
+    // {
+    //   name: "imagesGallery",
+    //   title: "Images gallery",
+    //   type: "array",
+    //   description:
+    //     "Image size should be < 5Mo, the first or the 2 first image will be used as the project thumbnail",
+    //   of: [{ type: "image" }],
+    //   // validation: (Rule) => Rule.required(),
+    // },
+    // {
+    //   name: "videosGallery",
+    //   title: "Videos gallery",
+    //   type: "array",
+    //   description: "Video links for looping and full videos.",
+    //   of: [
+    //     {
+    //       type: "object",
+    //       title: "VideoItem",
+    //       fields: [
+    //         {
+    //           name: "urlLoop",
+    //           type: "url",
+    //           title: "URL for Looping Video",
+    //         },
+    //         {
+    //           name: "urlVideo",
+    //           type: "url",
+    //           title: "URL for Full Video",
+    //         },
+    //         {
+    //           name: "videoShowPosition",
+    //           type: "number",
+    //           title: "Show Video After Image Number",
+    //           description:
+    //             "Select after which image the video should be shown. Ensure it's less than or equal to the total number of images in the gallery.",
+    //           validation: (Rule) =>
+    //             Rule.required()
+    //               .integer()
+    //               .positive()
+    //               .warning(
+    //                 "Ensure this is less than or equal to the total number of images in the gallery."
+    //               ),
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
   ],
-  // preview: {
-  //   select: {
-  //     talent: "talent",
-  //     tagsSUB: "tagsSUB.0.title", // Get the first item from the array of references
-  //   },
-  //   prepare: ({ talent, tagsSUB }) => {
-  //     console.log("Talent:", talent);
-  //     console.log("TagsSUB:", tagsSUB);
-      
-  //     const subCategory = tagsSUB; // Since tagsSUB now directly holds the title
-  //     console.log("SubCategory:", subCategory);
-      
-  //     const displayName = subCategory ? `${talent} - ${subCategory}` : talent;
-  //     console.log("DisplayName:", displayName);
-      
-  //     return {
-  //       title: displayName,
-  //     };
-  //   },
-  // },
 };

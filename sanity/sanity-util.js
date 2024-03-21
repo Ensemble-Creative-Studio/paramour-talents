@@ -5,24 +5,20 @@ export async function getHero() {
   return client.fetch(groq`
     *[_type == 'homePage' && imageOrUrl != null]{
       _type,
-
-  imageOrUrl,
-  bigSentence,
-  
-  "projects": projects[]->{
-    ...,
-slug,
-    client,
-    author[]->,
-   
-    "firstImage": imagesGallery[0].asset->{
-        url,
-      
-        metadata
-    }
-  },
-
-    
+      imageOrUrl,
+      bigSentence,
+      "projects": projects[]->{
+        ...,
+        slug,
+        client,
+        author[]->,
+        "firstImage": galleries[0].medias[]{
+          _type == "image" => {
+            "url": asset->url,
+            "metadata": asset->metadata
+          }
+        }[0],
+      },
     }
   `);
 }
@@ -43,9 +39,11 @@ export async function getFeaturedTalents() {
         talent,
         name,
         tags[]->,
-        "firstImage": imagesGallery[0].asset->{
-          url,
-        }
+        "firstImage": galleries[0].medias[]{
+          _type == "image" => {
+            "url": asset->url
+          }
+        }[0],
       },
     }
   `);
@@ -69,21 +67,21 @@ export async function getTalents() {
     groq`*[_type == 'talents']{
       ..., 
       tags[]->,
-      "firstImage": imagesGallery[0].asset->{
-        url,
-      
-        metadata
-    },
-    "secondImage": imagesGallery[1].asset->{
-        url,
-      
-        metadata
-    },
-    "videosLoop": videosGallery[]->{
-      urlLoop,
-      
-      
-    },
+      "firstImage": galleries[0].medias[]{
+        _type == "image" => {
+          "url": asset->url,
+          "metadata": asset->metadata
+        }
+      }[0],
+      "secondImage": galleries[0].medias[]{
+        _type == "image" => {
+          "url": asset->url,
+          "metadata": asset->metadata
+        }
+      }[1],
+      "videosLoop": galleries[].medias[]{
+        _type == "video" => {"url":urlLoop}
+      }
     }|order(orderRank)`
   );
 }

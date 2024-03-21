@@ -30,7 +30,7 @@ export default function ViewAll({ projectData, isVisible, setIsVisible }) {
     }
   };
   const handleItemClick = (index, type) => {
-    const videoCountBeforeThisItem = mergedItems.slice(0, index).filter(item => item.type === 'video').length;
+    const videoCountBeforeThisItem = mediasList.slice(0, index).filter(item => item.type === 'video').length;
     
     if (type === 'video') {
       setCurrentSlide(index - videoCountBeforeThisItem);
@@ -43,36 +43,17 @@ export default function ViewAll({ projectData, isVisible, setIsVisible }) {
 
   
 
+const mediasList = [];
 
-  const getTotalElements = () => {
-    const videosLength = projectData[0].videosGallery?.length || 0;
-    const imagesLength = projectData[0].imagesGallery?.length || 0;
-    return videosLength + imagesLength;
-  };
-  
-  
-
-  const elementsPerLine = getTotalElements() > 16 ? 12 : 8;
-
-  const gridTemplateColumns = `repeat(${elementsPerLine}, 1fr)`;
-// Initialize with images
-// Initialize an empty array
-const mergedItems = [];
-
-// Add all images first
-projectData[0].imagesGallery?.forEach(image => {
-  mergedItems.push({ type: 'image', data: image });
+projectData[0].galleries.forEach(gallery => {
+  gallery.medias.forEach(media => {
+    const mediaType = media._type;
+    mediasList.push({ type: mediaType, data: media });
+  })
 });
 
-// Add videos based on their position
-projectData[0].videosGallery?.forEach(video => {
-  if (video.videoShowPosition && video.videoShowPosition - 1 < mergedItems.length) {
-    mergedItems.splice(video.videoShowPosition - 1, 0, { type: 'video', data: video });
-  } else {
-    mergedItems.push({ type: 'video', data: video });
-  }
-});
-
+const elementsPerLine = mediasList.length > 8 ? 6 : 4;
+const gridTemplateColumns = `repeat(${elementsPerLine}, 1fr)`;
 
 
 return (
@@ -81,7 +62,7 @@ return (
       className="gap-10 flex z-40"
       style={{ display: "grid", gridTemplateColumns }}
     >
-      {mergedItems.map((item, index) => {
+      {mediasList.map((item, index) => {
         if (item.type === 'video') {
           return (
             <div key={item.data._key} className={`cursor-pointer flex items-end number-slide${index}`} onClick={() => handleItemClick(index, 'video')}>

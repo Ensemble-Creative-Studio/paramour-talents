@@ -1,7 +1,7 @@
 'use client';import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-export default function RandomClientGrid({ image }) {
+export default function RandomClientGrid({ image, talent }) {
   const [isBigWindow, setIsBigWindow] = useState(false);
   const [startColumn, setStartColumn] = useState(2);
   const [startRow, setStartRow] = useState(4);
@@ -56,7 +56,7 @@ export default function RandomClientGrid({ image }) {
           >
             <Image
               src={image}
-              alt="brands"
+              alt={talent}
               className="w-full object-cover h-auto"
               width={1000}
               height={1000}

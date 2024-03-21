@@ -149,20 +149,27 @@ export default function KeenSlider({ projectData }) {
       instanceRef.current.moveToIdx(currentSlide, false, { duration: 0 });
     }
   }, [currentSlide, instanceRef]);
-  // Assuming the provided asset reference can be transformed into a URL like this
-// Initialize with images
-// Initialize with images if they exist, otherwise initialize empty
-const mergedItems = projectData[0].imagesGallery?.length > 0 
-  ? projectData[0].imagesGallery.map(image => ({ type: 'image', data: image }))
-  : [];
 
-// Insert videos at their specific positions
-projectData[0].videosGallery?.forEach(video => {
-  const videoItem = { type: 'video', data: video };
-  mergedItems.splice(video.videoShowPosition - 1, 0, videoItem);
-});
+//   // Assuming the provided asset reference can be transformed into a URL like this
+// // Initialize with images
+// // Initialize with images if they exist, otherwise initialize empty
+// const mergedItems = projectData[0].imagesGallery?.length > 0 
+//   ? projectData[0].imagesGallery.map(image => ({ type: 'image', data: image }))
+//   : [];
 
+// // Insert videos at their specific positions
+// projectData[0].videosGallery?.forEach(video => {
+//   const videoItem = { type: 'video', data: video };
+//   mergedItems.splice(video.videoShowPosition - 1, 0, videoItem);
+// });
 
+const mergedItems = [];
+projectData[0].galleries.forEach(gallery => {
+    gallery.medias.forEach(media => {
+      const mediaType = media._type;
+      mergedItems.push({ type: mediaType, data: media });
+    });
+  });
 
 
 

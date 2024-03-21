@@ -14,7 +14,7 @@ export default function TalentList({ talentData, fontSize }) {
                : `${talent.name}`}
               </h2>
             </Link>
-            <RandomClientGrid image={talent.firstImage?.url} />
+            <RandomClientGrid image={talent.firstImage?.url} talent={talent.name} />
           </div>
         </div>
       ))}
