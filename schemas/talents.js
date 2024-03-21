@@ -15,18 +15,6 @@ export default {
       description: "Enter the name of the talent",
       required: true,
     },
-    { name: "tags",
-      type: "array",
-      title: "Expertises",
-      description:'Select an expertise for the talent',
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "tag" }],
-        },
-      ],
-      // validation: (Rule) => Rule.required(),
-    },
     { name: "slug",
       title: "Slug",
       type: "slug",
@@ -36,23 +24,6 @@ export default {
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
-    },
-    { name: 'instagram',
-    title: 'Instagram',
-    type: 'url',
-    description: 'Enter the talent\'s instagram page url',
-    validation: Rule => Rule
-        .uri({
-            scheme: ['https'],
-            allowRelative: false
-        })
-        .regex(/^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_.]+\/?$/)
-        .error('Please enter a valid Instagram URL')
-},
-    { name: "informationsBlock",
-      title: "Description",
-      type: "blockContent",
-      description: "Enter a text about the talent",
     },
     { name: "galleries",
       title: "Galleries",
@@ -128,53 +99,35 @@ export default {
       description:
         "Check this box to display only the first image in a bigger format on the work page.",
     },
+    { name: "tags",
+      type: "array",
+      title: "Expertises",
+      description:'Select an expertise for the talent',
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "tag" }],
+        },
+      ],
+      // validation: (Rule) => Rule.required(),
+    },
+    { name: 'instagram',
+    title: 'Instagram',
+    type: 'url',
+    description: 'Enter the talent\'s instagram page url',
+    validation: Rule => Rule
+        .uri({
+            scheme: ['https'],
+            allowRelative: false
+        })
+        .regex(/^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_.]+\/?$/)
+        .error('Please enter a valid Instagram URL')
+    },
+    { name: "informationsBlock",
+      title: "Description",
+      type: "blockContent",
+      description: "Enter a text about the talent",
+    },
     orderRankField({ type: "talents", name: "name" }),
-    // {
-    //   name: "imagesGallery",
-    //   title: "Images gallery",
-    //   type: "array",
-    //   description:
-    //     "Image size should be < 5Mo, the first or the 2 first image will be used as the project thumbnail",
-    //   of: [{ type: "image" }],
-    //   // validation: (Rule) => Rule.required(),
-    // },
-    // {
-    //   name: "videosGallery",
-    //   title: "Videos gallery",
-    //   type: "array",
-    //   description: "Video links for looping and full videos.",
-    //   of: [
-    //     {
-    //       type: "object",
-    //       title: "VideoItem",
-    //       fields: [
-    //         {
-    //           name: "urlLoop",
-    //           type: "url",
-    //           title: "URL for Looping Video",
-    //         },
-    //         {
-    //           name: "urlVideo",
-    //           type: "url",
-    //           title: "URL for Full Video",
-    //         },
-    //         {
-    //           name: "videoShowPosition",
-    //           type: "number",
-    //           title: "Show Video After Image Number",
-    //           description:
-    //             "Select after which image the video should be shown. Ensure it's less than or equal to the total number of images in the gallery.",
-    //           validation: (Rule) =>
-    //             Rule.required()
-    //               .integer()
-    //               .positive()
-    //               .warning(
-    //                 "Ensure this is less than or equal to the total number of images in the gallery."
-    //               ),
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
   ],
 };
