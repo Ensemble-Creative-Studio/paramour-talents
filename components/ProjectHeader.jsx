@@ -31,7 +31,7 @@ export default function MiniHeader({ title, authors, infos, pageData }) {
   };
 
   return (
-    <header className="fixed h-28 px-12 md:px-10 left-0 flex justify-between w-full top-10 md:top-0 z-20 items-center">
+    <header className="fixed h-28 px-6 left-0 flex justify-between w-full top-10 md:top-0 z-20 items-center">
       {/* Step 4: Use anchor tag and attach the handleCloseClick event handler */}
       <a
         className="itemFooter grey uppercase cursor-pointer leading-none md:flex-1"

@@ -33,9 +33,13 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
       return (<HeaderLink href={instagram}>INSTAGRAM</HeaderLink>)
     }
   }
+  const GalleryAnchor = (gallery) => {
+    const galleryName = gallery.gallery.title
+    return(<HeaderLink href={`#${galleryName}`}>{galleryName ? galleryName.toUpperCase() : ""}</HeaderLink>)
+  }
   return (
     <div className="relative">
-      <header className={`fixed px-12 md:px-10 left-0 flex flex-col w-full top-0 z-20 items-center ${isViewAllVisible ? "h-screen almostWhite" : ""}`}>
+      <header className={`fixed px-6 left-0 flex flex-col w-full top-0 z-20 items-center ${isViewAllVisible ? "h-screen almostWhite" : ""}`}>
         {/* Step 4: Use anchor tag and attach the handleCloseClick event handler */}
         <div className="flex flex-row w-full h-28 justify-between items-center">
           <a
@@ -45,9 +49,12 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
             Back
           </a>
           <div className="hidden md:flex items-center gap-8 everest md:justify-center">
-            <HeaderLink href="#portfolio">PORTFOLIO</HeaderLink>
+            {pageData[0].galleries.map(gallery => {
+              return (<GalleryAnchor gallery={gallery} />);
+            })}
+            {/* <HeaderLink href="#portfolio">PORTFOLIO</HeaderLink>
             <HeaderLink href="#videos">VIDEOS</HeaderLink>
-            <HeaderLink href="#bio">BIO</HeaderLink>
+            <HeaderLink href="#bio">BIO</HeaderLink> */}
             <InstagramLink></InstagramLink>
           </div>
           <div className="flex gap-3 flex-1 justify-end items-center">
