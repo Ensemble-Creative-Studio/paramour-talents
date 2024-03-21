@@ -171,21 +171,6 @@ projectData[0].galleries.forEach(gallery => {
     });
   });
 
-
-
-  // Sort the merged list based on videoShowPosition for videos and natural order for images
-  mergedItems.sort((a, b) => {
-    if (a.type === 'video' && b.type === 'image') {
-      return a.position - b.data._key; // Assuming image keys are sequential and can be used for sorting
-    } else if (a.type === 'image' && b.type === 'video') {
-      return a.data._key - b.position;
-    } else if (a.type === 'video' && b.type === 'video') {
-      return a.position - b.position;
-    } else {
-      return a.data._key - b.data._key; // Assuming image keys are sequential and can be used for sorting
-    }
-  });
-
   return (
     <div   ref={sliderRef}  className="keen-slider  h-screen">
       {mergedItems.map((item, index) => {

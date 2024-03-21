@@ -92,7 +92,7 @@ export default function TalentHeader({ talentName, tags, infos, pageData }) {
             </div>
           </div>
         </div>
-        <h2 className="hidden md:block romie text-7xl uppercase -m-8 text-center">{talentName}</h2>
+        <h1 className="hidden md:block romie text-7xl uppercase -m-8 text-center">{talentName}</h1>
       </header>
       <TalentGallery
         talentData={pageData}
