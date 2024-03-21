@@ -1,10 +1,18 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { urlForImage } from "@/sanity/lib/image";
 import FadingImage from "../utils/FadeInImage";
 import { useSlider } from "./context/SliderContext";
 
 export default function ViewAll({ projectData, isVisible, setIsVisible }) {
+  const [screenWidth, setScreenWidth] = useState(null);
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+    const handleResize = () => { setScreenWidth(window.innerWidth); };
+    window.addEventListener("resize", handleResize);
+    return () => { window.removeEventListener("resize", handleResize); };
+  }, []); 
+
   const { setCurrentSlide } = useSlider();
   const handleItemClick = (index) => {
     setCurrentSlide(index);
@@ -30,11 +38,11 @@ export default function ViewAll({ projectData, isVisible, setIsVisible }) {
     mediasList.push(galleryObject);
   });
 
-  const elementsPerLine = mediasList.length > 8 ? 6 : 4;
+  const elementsPerLine = screenWidth > 1280 ? 6 : idCounter > 8 ? 6 : 4;
   const gridTemplateColumns = `repeat(${elementsPerLine}, 1fr)`;
 
   return (
-    <div className={`fixed ${isVisible ? "transition-opacity-active" : "transition-opacity"} top-0 h-screen left-0 px-10 items-end justify-end   transition-opacity -z-20 pb-10 almostWhite md:flex hidden`}>
+    <div className={`fixed ${isVisible ? "transition-opacity-active" : "transition-opacity"} top-0 h-screen left-0 px-10 items-end justify-end   transition-opacity -z-20 pb-10 almostWhite md:flex hidden w-full`}>
         {mediasList.map((gallery, galleryIndex) => {
           return (
             <section key={galleryIndex} id={gallery.gallery} className="flex flex-col gap-3 w-full">
